@@ -1,133 +1,90 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Nexus Tech — Portal de Notícias</title>
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Nexus Tech — Portal Tech</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{overflow-x:hidden}
-img{max-width:100%;height:auto}
-:root{--accent:#f43f5e;--ink:#0f0f0f;--paper:#fafafa;--muted:#777;--border:#e0e0e0;--dark:#0f0f0f;--card:#fff}
-body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink)}
-a{color:inherit;text-decoration:none}
-.top-bar{background:var(--dark);color:#fff;padding:8px 0;font-size:.7rem;overflow:hidden}
-.top-bar-inner{max-width:1100px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between}
-.top-bar .date{opacity:.7}
-.header{background:var(--dark);padding:1rem 0;border-bottom:3px solid var(--accent)}
-.header-inner{max-width:1100px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between}
-.logo{font-family:'Space Grotesk',sans-serif;font-size:1.7rem;font-weight:700;color:#fff}
-.logo span{color:var(--accent)}
-.nav{display:flex;gap:1.5rem;font-size:.8rem;color:rgba(255,255,255,.7)}
-.nav a:hover{color:#fff}
-.search-box input{background:rgba(255,255,255,.1);border:none;color:#fff;border-radius:4px;padding:6px 14px;font-size:.8rem;font-family:inherit;outline:none;width:160px}
-.search-box input::placeholder{color:rgba(255,255,255,.5)}
-.hero{max-width:1100px;margin:2rem auto;padding:0 2rem;display:grid;grid-template-columns:1.5fr 1fr;gap:1.5rem}
-.hero-main{position:relative;border-radius:10px;overflow:hidden;min-height:380px}
-.hero-main img{width:100%;height:100%;object-fit:cover;position:absolute}
-.hero-main .overlay{position:absolute;bottom:0;left:0;right:0;padding:2rem;background:linear-gradient(transparent,rgba(0,0,0,.9));color:#fff}
-.hero-main .overlay .badge{background:var(--accent);font-size:.65rem;font-weight:700;padding:3px 10px;border-radius:3px;display:inline-block;margin-bottom:.6rem}
-.hero-main .overlay h1{font-family:'Space Grotesk',sans-serif;font-size:1.7rem;font-weight:700;line-height:1.25}
-.hero-main .overlay p{font-size:.8rem;opacity:.8;margin-top:.5rem}
-.hero-sidebar{display:flex;flex-direction:column;gap:.8rem}
-.hero-side{display:flex;gap:1rem;padding:.8rem;background:var(--card);border-radius:8px;border:1px solid var(--border);align-items:center}
-.hero-side img{width:90px;height:65px;object-fit:cover;border-radius:5px;flex-shrink:0}
-.hero-side h3{font-size:.82rem;font-weight:600;line-height:1.3}
-.hero-side .tag{font-size:.6rem;color:var(--accent);font-weight:700;display:block;margin-bottom:2px}
-.section-title{max-width:1100px;margin:2.5rem auto 1rem;padding:0 2rem;font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;display:flex;align-items:center;gap:.8rem}
-.section-title::after{content:'';flex:1;height:2px;background:var(--accent)}
-.news-feed{max-width:1100px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:2fr 1fr;gap:2rem}
-.feed-main .news-item{display:grid;grid-template-columns:1fr 180px;gap:1.5rem;align-items:start;padding:1.2rem 0;border-bottom:1px solid var(--border)}
-.news-item .tag{font-size:.65rem;color:var(--accent);font-weight:700;text-transform:uppercase;margin-bottom:.3rem;display:block}
-.news-item h3{font-size:1rem;font-weight:600;line-height:1.35;margin-bottom:.3rem}
-.news-item p{font-size:.8rem;color:var(--muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.news-item .meta{font-size:.7rem;color:var(--muted);margin-top:.5rem}
-.news-item img{width:180px;height:120px;object-fit:cover;border-radius:6px}
-.sidebar-box{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.2rem}
-.sidebar-box h3{font-family:'Space Grotesk',sans-serif;font-size:.85rem;font-weight:700;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--accent)}
-.sidebar-item{padding:.6rem 0;border-bottom:1px solid var(--border);font-size:.82rem;font-weight:500;line-height:1.35}
-.sidebar-item span{font-size:.68rem;color:var(--muted);display:block;margin-top:2px}
-.footer{background:var(--dark);color:#fff;padding:3rem 2rem;margin-top:3rem}
-.footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;font-size:.78rem}
-.footer-inner h4{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:.8rem;color:var(--accent)}
-.footer-inner a{display:block;color:#aaa;margin-bottom:.4rem}
-.footer-bottom{max-width:1100px;margin:0 auto;padding-top:2rem;border-top:1px solid #333;font-size:.7rem;color:#666;text-align:center;margin-top:2rem}
-.article-view{max-width:700px;margin:2rem auto;padding:0 2rem;display:none}
-.article-view.active{display:block}
-.article-view .back{display:inline-block;font-size:.85rem;color:var(--accent);font-weight:600;cursor:pointer;margin-bottom:1.5rem}
-.article-view h1{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;line-height:1.2;margin-bottom:.5rem}
-.article-view .meta{font-size:.82rem;color:var(--muted);margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
-.article-view .cover{width:100%;border-radius:8px;margin-bottom:1.5rem}
-.article-view .body{font-size:1rem;line-height:1.85;color:#333}
-.article-view .body p{margin-bottom:1rem}
-.article-view .tags{margin-top:2rem;display:flex;gap:6px;flex-wrap:wrap}
-.article-view .tags span{font-size:.7rem;background:#fff0f3;color:var(--accent);padding:4px 10px;border-radius:4px;font-weight:600}
-.home-view{}
-.home-view.hidden{display:none}
+*{margin:0;padding:0;box-sizing:border-box}html,body{overflow-x:hidden}img{max-width:100%;height:auto}
+:root{--a:#34d399;--ink:#e8e8e8;--p:#0d0d12;--m:#888;--b:#1e1e2a;--c:#13131d;--c2:#181824}
+body{font-family:'Inter',sans-serif;background:var(--p);color:var(--ink)}a{color:inherit;text-decoration:none}
+.header{background:var(--c);border-bottom:1px solid var(--b)}
+.hi{max-width:1200px;margin:0 auto;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:700}.logo span{color:var(--a)}
+.nav{display:flex;gap:1.5rem;font-size:.78rem;color:var(--m)}.nav a:hover{color:var(--a)}
+.si input{background:var(--c2);border:1px solid var(--b);color:var(--ink);border-radius:4px;padding:6px 14px;font-size:.78rem;font-family:inherit;outline:none;width:160px}
+.si input::placeholder{color:#555}
+.hero{max-width:1200px;margin:2rem auto;padding:0 2rem;display:grid;grid-template-columns:1.5fr 1fr;gap:2rem}
+.hero-l{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.hero-l a{font-size:.8rem;line-height:1.4;padding:.6rem 0;border-bottom:1px solid var(--b)}
+.hero-l a .tg{color:var(--a);font-size:.6rem;font-weight:700;text-transform:uppercase}
+.hero-r .feat{position:relative;border-radius:8px;overflow:hidden;min-height:320px}
+.hero-r .feat img{width:100%;height:100%;object-fit:cover;position:absolute}
+.hero-r .feat .ov{position:absolute;bottom:0;left:0;right:0;padding:1.5rem;background:linear-gradient(transparent,rgba(0,0,0,.9))}
+.hero-r .feat .ov h2{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;line-height:1.25}
+.hero-r .feat .ov p{font-size:.78rem;opacity:.8;margin-top:.4rem}
+.st{max-width:1200px;margin:2.5rem auto 1rem;padding:0 2rem;font-family:'Space Grotesk',sans-serif;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--a);border-bottom:1px solid var(--b);padding-bottom:.5rem}
+.grid3{max-width:1200px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.card{background:var(--c);border-radius:8px;overflow:hidden;border:1px solid var(--b);transition:.2s}.card:hover{border-color:var(--a)}
+.card img{width:100%;height:170px;object-fit:cover}
+.card .cb{padding:1rem}.card .cb .tg{font-size:.6rem;color:var(--a);font-weight:700;text-transform:uppercase;margin-bottom:.3rem}
+.card .cb h3{font-size:.9rem;font-weight:600;line-height:1.3;margin-bottom:.3rem}
+.card .cb p{font-size:.75rem;color:var(--m);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .cb .mt{font-size:.65rem;color:var(--m);margin-top:.6rem}
+.catgrid{max-width:1200px;margin:2rem auto;padding:0 2rem;display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
+.catcard{background:var(--c);border:1px solid var(--b);border-radius:8px;padding:1rem;text-align:center;cursor:pointer;transition:.2s}
+.catcard:hover{border-color:var(--a);background:var(--c2)}
+.catcard img{width:100%;height:80px;object-fit:cover;border-radius:4px;margin-bottom:.5rem}
+.catcard h4{font-size:.75rem;font-weight:600}
+.footer{border-top:1px solid var(--b);padding:2rem;margin-top:3rem;text-align:center;font-size:.72rem;color:var(--m)}
+.av{max-width:700px;margin:2rem auto;padding:0 2rem;display:none}.av.active{display:block}
+.av .back{display:inline-block;font-size:.85rem;color:var(--a);cursor:pointer;margin-bottom:1.5rem;font-weight:600}
+.av h1{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;line-height:1.2;margin-bottom:.5rem}
+.av .meta{font-size:.82rem;color:var(--m);margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--b)}
+.av .cover{width:100%;border-radius:8px;margin-bottom:1.5rem}
+.av .body{font-size:1rem;line-height:1.85;color:#ccc}.av .body p{margin-bottom:1rem}
+.av .tags{margin-top:2rem;display:flex;gap:6px;flex-wrap:wrap}.av .tags span{font-size:.7rem;background:var(--c);border:1px solid var(--b);padding:4px 10px;border-radius:4px}
+.hv{}.hv.hidden{display:none}
 @media(max-width:768px){
-.top-bar-inner{padding:0 1rem}
-.header-inner{padding:0 1rem;flex-wrap:wrap;gap:.5rem}
-.logo{font-size:1.3rem}
-.nav{display:none}
-.search-box input{width:100%}
-.hero{grid-template-columns:1fr;padding:0 1rem}
-.hero-main{min-height:250px}
-.hero-main .overlay h1{font-size:1.3rem}
-.hero-sidebar{display:none}
-.news-feed{grid-template-columns:1fr;padding:0 1rem}
-.feed-main .news-item{grid-template-columns:1fr 100px;gap:1rem}
-.news-item img{width:100px;height:75px}
-.news-item h3{font-size:.88rem}
-.sidebar-box{display:none}
-.footer-inner{grid-template-columns:1fr 1fr}
-.footer{padding:2rem 1rem}
-.article-view{padding:0 1rem}
-.article-view h1{font-size:1.4rem}
+.hi{padding:.8rem 1rem;flex-wrap:wrap;gap:.5rem}.logo{font-size:1.2rem}.nav{display:none}.si input{width:100%}
+.hero{grid-template-columns:1fr;padding:0 1rem}.hero-l{grid-template-columns:1fr;display:none}
+.hero-r .feat{min-height:250px}.hero-r .feat .ov h2{font-size:1.2rem}
+.grid3{grid-template-columns:1fr!important;padding:0 1rem}.catgrid{grid-template-columns:repeat(3,1fr);padding:0 1rem}
+.av{padding:0 1rem}.av h1{font-size:1.4rem}.st{padding:0 1rem;padding-bottom:.5rem}
 }
-</style>
-</head>
-<body>
-<div class="home-view" id="homeView">
-<div class="top-bar"><div class="top-bar-inner"><span class="date" id="dateNow"></span><span>Portal de Notícias Tech</span></div></div>
-<div class="header"><div class="header-inner">
-<div class="logo">Nexus<span>Tech</span></div>
-<div class="nav" id="navFilters"></div>
-<div class="search-box"><input type="text" placeholder="Buscar..." id="searchInput" oninput="handleSearch()"></div>
-</div></div>
-<div class="hero" id="heroSection"></div>
-<div class="section-title">Últimas Notícias</div>
-<div class="news-feed"><div class="feed-main" id="newsList"></div><div><div class="sidebar-box"><h3>Destaques</h3><div id="sidebarList"></div></div></div></div>
-<div class="footer"><div class="footer-inner">
-<div><h4>Categorias</h4><a href="#">Bitcoin</a><a href="#">Ethereum</a><a href="#">DeFi</a><a href="#">Web3</a></div>
-<div><h4>Seções</h4><a href="#">Análises</a><a href="#">Regulação</a><a href="#">Tecnologia</a></div>
-<div><h4>Sobre</h4><a href="#">Quem Somos</a><a href="#">Contato</a><a href="#">Termos</a></div>
-<div><h4>Nexus Tech</h4><p style="font-size:.75rem;color:#888">Notícias de tecnologia e inovação.</p></div>
-</div><div class="footer-bottom">© 2026 Nexus Tech. Todos os direitos reservados.</div></div>
+</style></head><body>
+<div class="hv" id="hv">
+<div class="header"><div class="hi"><div class="logo">Nexus<span>Tech</span></div><div class="nav" id="nf"></div><div class="si"><input type="text" placeholder="Buscar..." id="si" oninput="hS()"></div></div></div>
+<div class="hero"><div class="hero-l" id="hl"></div><div class="hero-r" id="hr"></div></div>
+<div class="st">Popular Crypto News</div>
+<div class="grid3" id="g3"></div>
+<div class="st">Explorar por Categoria</div>
+<div class="catgrid" id="cg"></div>
+<div class="st">Últimas Notícias</div>
+<div class="grid3" id="g3b"></div>
+<div class="footer">© 2026 Nexus Tech. Todos os direitos reservados. | Termos | Privacidade</div>
 </div>
-<div class="article-view" id="articleView"><span class="back" onclick="goHome()">← Voltar</span><div id="articleContent"></div></div>
-<script>
-const SUPA="https://vpvsrjkotstvjywhuacr.supabase.co",KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwdnNyamtvdHN0dmp5d2h1YWNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcyMzE2MzQsImV4cCI6MjA2MjgwNzYzNH0.BDh59N4okIoJB0aOheqp07lYLgd0A4y3Ho1H26xl2jw";
-let allNews=[],searchQuery='',currentFilter='';
-document.getElementById('dateNow').textContent=new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-function parseTags(h){if(!h)return[];if(Array.isArray(h))return h;if(typeof h==='string')return h.split('#').filter(Boolean).map(t=>t.trim());return[]}
-async function init(){const r=await fetch(SUPA+'/rest/v1/noticiasgeral?status=eq.publicado&order=created_at.desc&limit=30',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}});allNews=await r.json();renderHome();handleHash()}
-function renderHome(){let news=getFiltered();
-if(news.length>0){const n=news[0];const tags=parseTags(n.hashtags);const sidebar=news.slice(1,6);
-document.getElementById('heroSection').innerHTML=`
-<a href="#/article/${n.slug}" class="hero-main"><img src="${n.capa_noticia||''}" onerror="this.style.background='#ddd'" alt=""><div class="overlay"><span class="badge">${tags[0]||'Tech'}</span><h1>${n.titulo_noticia||''}</h1><p>${(n.resumo_noticia||'').slice(0,150)}...</p></div></a>
-<div class="hero-sidebar">${sidebar.map(s=>{const t=parseTags(s.hashtags);return`<a href="#/article/${s.slug}" class="hero-side"><img src="${s.capa_noticia||''}" onerror="this.style.background='#eee'" alt=""><div><span class="tag">${t[0]||'Tech'}</span><h3>${s.titulo_noticia||''}</h3></div></a>`}).join('')}</div>`}
-document.getElementById('newsList').innerHTML=news.slice(6).map(n=>{const tags=parseTags(n.hashtags);return`
-<a href="#/article/${n.slug}" class="news-item"><div><span class="tag">${tags[0]||'Tech'}</span><h3>${n.titulo_noticia||''}</h3><p>${(n.resumo_noticia||'').slice(0,120)}</p><div class="meta">${n.autor||'Redação'} · ${n.created_at?new Date(n.created_at).toLocaleDateString('pt-BR',{day:'numeric',month:'short'}):''}</div></div><img src="${n.capa_noticia||''}" onerror="this.style.background='#eee'" alt=""></a>`}).join('');
-document.getElementById('sidebarList').innerHTML=news.slice(0,5).map(n=>`<a href="#/article/${n.slug}" class="sidebar-item">${n.titulo_noticia||''}<span>${n.created_at?new Date(n.created_at).toLocaleDateString('pt-BR',{day:'numeric',month:'short'}):''}</span></a>`).join('');
-const cats=[...new Set(allNews.flatMap(n=>parseTags(n.hashtags).slice(0,2)))].filter(c=>c.length<15).slice(0,5);
-document.getElementById('navFilters').innerHTML=cats.map(c=>`<a href="#" onclick="event.preventDefault();setFilter('${c}')">${c}</a>`).join('')}
-function setFilter(f){currentFilter=currentFilter===f?'':f;renderHome()}
-function handleSearch(){searchQuery=document.getElementById('searchInput').value.toLowerCase();renderHome()}
-function getFiltered(){let f=allNews;if(currentFilter)f=f.filter(n=>parseTags(n.hashtags).includes(currentFilter));if(searchQuery)f=f.filter(n=>(n.titulo_noticia||'').toLowerCase().includes(searchQuery)||(n.resumo_noticia||'').toLowerCase().includes(searchQuery));return f}
-function showArticle(slug){const n=allNews.find(a=>a.slug===slug);if(!n)return;const tags=parseTags(n.hashtags);document.getElementById('articleContent').innerHTML=`<h1>${n.titulo_noticia||''}</h1><div class="meta">${n.autor||'Redação'} · ${n.created_at?new Date(n.created_at).toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'}):''}</div>${n.capa_noticia?`<img class="cover" src="${n.capa_noticia}" alt="">`:''}<div class="body">${(n.resumo_noticia||'').split('\n').map(p=>'<p>'+p+'</p>').join('')}</div><div class="tags">${tags.map(t=>'<span>#'+t+'</span>').join('')}</div>`;
-document.getElementById('homeView').classList.add('hidden');document.getElementById('articleView').classList.add('active');window.scrollTo(0,0)}
-function goHome(){document.getElementById('homeView').classList.remove('hidden');document.getElementById('articleView').classList.remove('active')}
-function handleHash(){const h=location.hash;if(h.startsWith('#/article/'))showArticle(h.replace('#/article/',''));else goHome()}
-window.addEventListener('hashchange',handleHash);init();
+<div class="av" id="av"><span class="back" onclick="gH()">← Voltar</span><div id="ac"></div></div>
+<script>const SUPA="https://vpvsrjkotstvjywhuacr.supabase.co",KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwdnNyamtvdHN0dmp5d2h1YWNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcyMzE2MzQsImV4cCI6MjA2MjgwNzYzNH0.BDh59N4okIoJB0aOheqp07lYLgd0A4y3Ho1H26xl2jw";
+let allNews=[],sq='',cf='';
+function pT(h){if(!h)return[];if(Array.isArray(h))return h;if(typeof h==='string')return h.split('#').filter(Boolean).map(t=>t.trim());return[]}
+function fmtD(d){return d?new Date(d).toLocaleDateString('pt-BR',{day:'numeric',month:'short',year:'numeric'}):'';}
+function fmtDL(d){return d?new Date(d).toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'}):'';}
+async function init(){const r=await fetch(SUPA+'/rest/v1/noticiasgeral?status=eq.publicado&order=created_at.desc&limit=40',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}});allNews=await r.json();render();hH()}
+function gF(){let f=allNews;if(cf)f=f.filter(n=>pT(n.hashtags).includes(cf));if(sq)f=f.filter(n=>(n.titulo_noticia||'').toLowerCase().includes(sq)||(n.resumo_noticia||'').toLowerCase().includes(sq));return f}
+function sF(f){cf=cf===f?'':f;render()}
+function hS(){sq=document.getElementById('si').value.toLowerCase();render()}
+function sA(slug){const n=allNews.find(a=>a.slug===slug);if(!n)return;const tags=pT(n.hashtags);
+document.getElementById('ac').innerHTML=`<h1>${n.titulo_noticia||''}</h1><div class="meta">${n.autor||'Redação'} · ${fmtDL(n.created_at)}</div>${n.capa_noticia?`<img class="cover" src="${n.capa_noticia}" alt="">`:''}
+<div class="body">${(n.resumo_noticia||'').split('\n').map(p=>'<p>'+p+'</p>').join('')}</div><div class="tags">${tags.map(t=>'<span>#'+t+'</span>').join('')}</div>`;
+document.getElementById('hv').classList.add('hidden');document.getElementById('av').classList.add('active');window.scrollTo(0,0)}
+function gH(){document.getElementById('hv').classList.remove('hidden');document.getElementById('av').classList.remove('active')}
+function hH(){const h=location.hash;if(h.startsWith('#/article/'))sA(h.replace('#/article/',''));else gH()}
+window.addEventListener('hashchange',hH);init();
+function render(){let n=gF();
+if(n.length>0){const h=n[0];const t=pT(h.hashtags);
+document.getElementById('hr').innerHTML=`<a href="#/article/${h.slug}" class="feat"><img src="${h.capa_noticia||''}" onerror="this.style.background='#1a1a2e'" alt=""><div class="ov"><h2>${h.titulo_noticia||''}</h2><p>${(h.resumo_noticia||'').slice(0,120)}...</p></div></a>`;
+document.getElementById('hl').innerHTML=n.slice(1,9).map(x=>{const xt=pT(x.hashtags);return`<a href="#/article/${x.slug}"><div class="tg">${xt[0]||'Tech'}</div>${x.titulo_noticia||''}</a>`}).join('')}
+document.getElementById('g3').innerHTML=n.slice(1,7).map(x=>{const t=pT(x.hashtags);return`<a href="#/article/${x.slug}" class="card"><img src="${x.capa_noticia||''}" onerror="this.style.background='#1a1a2e'" alt=""><div class="cb"><span class="tg">${t[0]||'Tech'}</span><h3>${x.titulo_noticia||''}</h3><p>${(x.resumo_noticia||'').slice(0,100)}</p><div class="mt">${fmtD(x.created_at)}</div></div></a>`}).join('');
+const cats=[...new Set(n.flatMap(x=>pT(x.hashtags).slice(0,1)))].filter(c=>c.length<15).slice(0,5);
+document.getElementById('cg').innerHTML=cats.map((c,i)=>`<div class="catcard" onclick="sF('${c}')">${n[i]&&n[i].capa_noticia?`<img src="${n[i].capa_noticia}" alt="">`:''} <h4>${c}</h4></div>`).join('');
+document.getElementById('g3b').innerHTML=n.slice(7,16).map(x=>{const t=pT(x.hashtags);return`<a href="#/article/${x.slug}" class="card"><img src="${x.capa_noticia||''}" onerror="this.style.background='#1a1a2e'" alt=""><div class="cb"><span class="tg">${t[0]||'Tech'}</span><h3>${x.titulo_noticia||''}</h3><p>${(x.resumo_noticia||'').slice(0,100)}</p><div class="mt">${fmtD(x.created_at)}</div></div></a>`}).join('');
+document.getElementById('nf').innerHTML=cats.map(c=>`<a href="#" onclick="event.preventDefault();sF('${c}')">${c}</a>`).join('')}
 </script></body></html>
