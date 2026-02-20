@@ -49,6 +49,18 @@ body{font-family:'Inter',sans-serif;background:var(--p);color:var(--ink)}a{color
 .grid3{grid-template-columns:1fr!important;padding:0 1rem}.catgrid{grid-template-columns:repeat(3,1fr);padding:0 1rem}
 .av{padding:0 1rem}.av h1{font-size:1.4rem}.st{padding:0 1rem;padding-bottom:.5rem}
 }
+
+.body h1,.body h2,.body h3{margin:1.5rem 0 .8rem;font-weight:700}
+.body h2{font-size:1.4rem}
+.body h3{font-size:1.15rem}
+.body strong{font-weight:700}
+.body em{font-style:italic}
+.body ul{margin:.8rem 0;padding-left:1.5rem}
+.body li{margin-bottom:.4rem;line-height:1.6}
+.body blockquote{border-left:3px solid var(--a,#6366f1);padding:.5rem 1rem;margin:1rem 0;font-style:italic;opacity:.85}
+.body a{color:var(--a,#6366f1);text-decoration:underline}
+.body code{background:rgba(0,0,0,.06);padding:2px 6px;border-radius:3px;font-size:.9em}
+.body p{margin-bottom:1rem}
 </style></head><body>
 <div class="hv" id="hv">
 <div class="header"><div class="hi"><div class="logo">Nexus<span>Tech</span></div><div class="nav" id="nf"></div><div class="si"><input type="text" placeholder="Buscar..." id="si" oninput="hS()"></div></div></div>
@@ -63,6 +75,25 @@ body{font-family:'Inter',sans-serif;background:var(--p);color:var(--ink)}a{color
 </div>
 <div class="av" id="av"><span class="back" onclick="gH()">← Voltar</span><div id="ac"></div></div>
 <script>const SUPA="https://vpvsrjkotstvjywhuacr.supabase.co",KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwdnNyamtvdHN0dmp5d2h1YWNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcyMzE2MzQsImV4cCI6MjA2MjgwNzYzNH0.BDh59N4okIoJB0aOheqp07lYLgd0A4y3Ho1H26xl2jw";
+function sm(t){if(!t)return'';return t.replace(/[#*>`\[\]()]/g,'').replace(/\n/g,' ').trim();}
+function md(t){if(!t)return'';return t
+.replace(/^### (.*$)/gm,'<h3>$1</h3>')
+.replace(/^## (.*$)/gm,'<h2>$1</h2>')
+.replace(/^# (.*$)/gm,'<h1>$1</h1>')
+.replace(/\*\*\*(.*?)\*\*\*/g,'<strong><em>$1</em></strong>')
+.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+.replace(/\*(.*?)\*/g,'<em>$1</em>')
+.replace(/^\s*[-*]\s+(.*)$/gm,'<li>$1</li>')
+.replace(/(<li>.*<\/li>)/gs,function(m){return'<ul>'+m+'</ul>'})
+.replace(/(<\/ul>\s*<ul>)/g,'')
+.replace(/^>\s*(.*$)/gm,'<blockquote>$1</blockquote>')
+.replace(/(<\/blockquote>\s*<blockquote>)/g,'<br>')
+.replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank" style="color:var(--a);text-decoration:underline">$1</a>')
+.replace(/`([^`]+)`/g,'<code style="background:rgba(255,255,255,.1);padding:2px 6px;border-radius:3px;font-size:.9em">$1</code>')
+.replace(/\n\n/g,'</p><p>')
+.replace(/\n/g,'<br>')
+.replace(/^(.+)$/,'<p>$1</p>')
+;}
 let allNews=[],sq='',cf='';
 function pT(h){if(!h)return[];if(Array.isArray(h))return h;if(typeof h==='string')return h.split('#').filter(Boolean).map(t=>t.trim());return[]}
 function fmtD(d){return d?new Date(d).toLocaleDateString('pt-BR',{day:'numeric',month:'short',year:'numeric'}):'';}
@@ -73,18 +104,18 @@ function sF(f){cf=cf===f?'':f;render()}
 function hS(){sq=document.getElementById('si').value.toLowerCase();render()}
 function sA(slug){const n=allNews.find(a=>a.slug===slug);if(!n)return;const tags=pT(n.hashtags);
 document.getElementById('ac').innerHTML=`<h1>${n.titulo_noticia||''}</h1><div class="meta">${n.autor||'Redação'} · ${fmtDL(n.created_at)}</div>${n.capa_noticia?`<img class="cover" src="${n.capa_noticia}" alt="">`:''}
-<div class="body">${(n.resumo_noticia||'').split('\n').map(p=>'<p>'+p+'</p>').join('')}</div><div class="tags">${tags.map(t=>'<span>#'+t+'</span>').join('')}</div>`;
+<div class="body">${md(n.resumo_noticia||'')}</div><div class="tags">${tags.map(t=>'<span>#'+t+'</span>').join('')}</div>`;
 document.getElementById('hv').classList.add('hidden');document.getElementById('av').classList.add('active');window.scrollTo(0,0)}
 function gH(){document.getElementById('hv').classList.remove('hidden');document.getElementById('av').classList.remove('active')}
 function hH(){const h=location.hash;if(h.startsWith('#/article/'))sA(h.replace('#/article/',''));else gH()}
 window.addEventListener('hashchange',hH);init();
 function render(){let n=gF();
 if(n.length>0){const h=n[0];const t=pT(h.hashtags);
-document.getElementById('hr').innerHTML=`<a href="#/article/${h.slug}" class="feat"><img src="${h.capa_noticia||''}" onerror="this.style.background='#1a1a2e'" alt=""><div class="ov"><h2>${h.titulo_noticia||''}</h2><p>${(h.resumo_noticia||'').slice(0,120)}...</p></div></a>`;
+document.getElementById('hr').innerHTML=`<a href="#/article/${h.slug}" class="feat"><img src="${h.capa_noticia||''}" onerror="this.style.background='#1a1a2e'" alt=""><div class="ov"><h2>${h.titulo_noticia||''}</h2><p>${sm(h.resumo_noticia||'').slice(0,120)}...</p></div></a>`;
 document.getElementById('hl').innerHTML=n.slice(1,9).map(x=>{const xt=pT(x.hashtags);return`<a href="#/article/${x.slug}"><div class="tg">${xt[0]||'Tech'}</div>${x.titulo_noticia||''}</a>`}).join('')}
-document.getElementById('g3').innerHTML=n.slice(1,7).map(x=>{const t=pT(x.hashtags);return`<a href="#/article/${x.slug}" class="card"><img src="${x.capa_noticia||''}" onerror="this.style.background='#1a1a2e'" alt=""><div class="cb"><span class="tg">${t[0]||'Tech'}</span><h3>${x.titulo_noticia||''}</h3><p>${(x.resumo_noticia||'').slice(0,100)}</p><div class="mt">${fmtD(x.created_at)}</div></div></a>`}).join('');
+document.getElementById('g3').innerHTML=n.slice(1,7).map(x=>{const t=pT(x.hashtags);return`<a href="#/article/${x.slug}" class="card"><img src="${x.capa_noticia||''}" onerror="this.style.background='#1a1a2e'" alt=""><div class="cb"><span class="tg">${t[0]||'Tech'}</span><h3>${x.titulo_noticia||''}</h3><p>${sm(x.resumo_noticia||'').slice(0,100)}</p><div class="mt">${fmtD(x.created_at)}</div></div></a>`}).join('');
 const cats=[...new Set(n.flatMap(x=>pT(x.hashtags).slice(0,1)))].filter(c=>c.length<15).slice(0,5);
 document.getElementById('cg').innerHTML=cats.map((c,i)=>`<div class="catcard" onclick="sF('${c}')">${n[i]&&n[i].capa_noticia?`<img src="${n[i].capa_noticia}" alt="">`:''} <h4>${c}</h4></div>`).join('');
-document.getElementById('g3b').innerHTML=n.slice(7,16).map(x=>{const t=pT(x.hashtags);return`<a href="#/article/${x.slug}" class="card"><img src="${x.capa_noticia||''}" onerror="this.style.background='#1a1a2e'" alt=""><div class="cb"><span class="tg">${t[0]||'Tech'}</span><h3>${x.titulo_noticia||''}</h3><p>${(x.resumo_noticia||'').slice(0,100)}</p><div class="mt">${fmtD(x.created_at)}</div></div></a>`}).join('');
+document.getElementById('g3b').innerHTML=n.slice(7,16).map(x=>{const t=pT(x.hashtags);return`<a href="#/article/${x.slug}" class="card"><img src="${x.capa_noticia||''}" onerror="this.style.background='#1a1a2e'" alt=""><div class="cb"><span class="tg">${t[0]||'Tech'}</span><h3>${x.titulo_noticia||''}</h3><p>${sm(x.resumo_noticia||'').slice(0,100)}</p><div class="mt">${fmtD(x.created_at)}</div></div></a>`}).join('');
 document.getElementById('nf').innerHTML=cats.map(c=>`<a href="#" onclick="event.preventDefault();sF('${c}')">${c}</a>`).join('')}
 </script></body></html>
